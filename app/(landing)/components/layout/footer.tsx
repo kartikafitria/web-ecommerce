@@ -3,12 +3,10 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-alternate text-white mt-52">
+    <footer className="bg-dark-alternate text-white">
       
-      {/* TOP */}
       <div className="container mx-auto flex justify-between pt-16 pb-24">
         
-        {/* LEFT */}
         <div className="w-[360px]">
           <Image
             src="/images/logo-footer.svg"
@@ -24,10 +22,8 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* RIGHT */}
         <div className="grid grid-cols-2 gap-32 text-gray-300">
           
-          {/* MENU */}
           <div className="flex flex-col gap-4">
             <Link href="#">Home</Link>
             <Link href="#">Categories</Link>
@@ -35,7 +31,6 @@ const Footer = () => {
             <Link href="#">About Us</Link>
           </div>
 
-          {/* SOCIAL */}
           <div className="flex flex-col gap-4">
             <Link href="#">Instagram</Link>
             <Link href="#">Facebook</Link>
@@ -46,14 +41,11 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* BOTTOM */}
       <div className="border-t border-white/10">
         <div className="container mx-auto grid grid-cols-2 py-5 text-sm text-gray-400 items-center">
 
-          {/* LEFT */}
           <span>SportsOn © 2025 All Rights Reserved.</span>
 
-          {/* RIGHT */}
           <div className="justify-self-end">
             <div className="grid grid-cols-2 gap-32">
               <Link href="#">Privacy Policy</Link>

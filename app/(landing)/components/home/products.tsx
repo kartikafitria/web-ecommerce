@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FiPlus } from "react-icons/fi";
+import priceFormatter from "@/app/utils/price-formatter";
 
 const productList = [
   { name: "SportsOn Hyperfast Shoes", category: "Running", price: 329000, imgUrl: "product-1.svg" },
@@ -15,19 +16,18 @@ const productList = [
 
 const ProductsSection = () => {
   return (
-    <section id="products-section" className="container mx-auto mt-40">
-      <h2 className="font-extrabold italic text-4xl text-center mb-16">
+    <section id="products-section" className="container mx-auto mt-32 mb-52">
+      <h2 className="font-extrabold italic text-4xl text-center mb-11">
         <span className="text-primary">OUR </span>PRODUCTS
       </h2>
 
       <div className="grid grid-cols-4 gap-12">
         {productList.map((product, index) => (
           <Link
-            href="#"
+            href={`/product/${product.name}`}
             key={index}
             className="bg-white rounded-xl p-3 hover:shadow-xl duration-300"
           >
-            {/* IMAGE BOX */}
             <div className="bg-[#F6ECEC] rounded-lg aspect-square flex justify-center items-center relative">
               <Image
                 src={`/images/products/${product.imgUrl}`}
@@ -37,13 +37,11 @@ const ProductsSection = () => {
                 className="object-contain"
               />
 
-              {/* PLUS BUTTON */}
               <div className="absolute top-3 right-3 w-7 h-7 bg-primary text-white flex items-center justify-center rounded">
                 <FiPlus size={16} />
               </div>
             </div>
 
-            {/* INFO */}
             <h3 className="font-semibold text-sm mt-4 mb-1">
               {product.name}
             </h3>
@@ -53,11 +51,7 @@ const ProductsSection = () => {
             </p>
 
             <p className="text-primary font-semibold text-sm">
-              {new Intl.NumberFormat("id-ID", {
-                style: "currency",
-                currency: "IDR",
-                maximumSignificantDigits: 3,
-              }).format(product.price)}
+              {priceFormatter(product.price)}
             </p>
           </Link>
         ))}
