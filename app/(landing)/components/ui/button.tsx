@@ -1,19 +1,21 @@
+import React from "react";
+
 type TButtonProps = {
   children: React.ReactNode;
   className?: string;
   variant?: "primary" | "dark" | "ghost";
-  size?: "normal" | "small";
+  size?: "normal" | "small" | "icon";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
   children,
-  className,
+  className = "",
   variant = "primary",
   size = "normal",
   ...props
 }: TButtonProps) => {
   const baseStyles =
-    "inline-flex gap-3 items-center justify-center rounded-md font-medium transition duration-300 hover:scale-105";
+    "inline-flex items-center justify-center rounded-md font-medium transition duration-300 hover:scale-105";
 
   const variants = {
     primary: "bg-primary text-white hover:bg-primary/90",
@@ -22,8 +24,9 @@ const Button = ({
   };
 
   const sizes = {
-    normal: "py-4 px-9",
-    small: "py-2 px-6 text-sm",
+    normal: "py-4 px-9 gap-3",
+    small: "py-2 px-6 text-sm gap-2",
+    icon: "w-7 h-7 p-0",
   };
 
   return (

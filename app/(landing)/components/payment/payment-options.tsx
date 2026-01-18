@@ -1,5 +1,6 @@
 import { FiCreditCard } from "react-icons/fi";
 import CardWithHeader from "../ui/card-with-header";
+import { getAllBanks } from "@/app/services/bank.service";
 
 const paymentList = [
   {
@@ -19,11 +20,13 @@ const paymentList = [
   },
 ];
 
-const PaymentOptions = () => {
+const PaymentOptions = async () => {
+  const banks = await getAllBanks();
+
   return (
     <CardWithHeader title="Payment Options">
-      <div className="min-h-[330px]">
-        {paymentList.map((payment, index) => (
+      <div className="min-h-[260px]">
+        {banks.map((payment, index) => (
           <div
             key={index}
             className="flex items-center justify-between p-5 border-b border-gray-200 last:border-b-0"
@@ -35,15 +38,15 @@ const PaymentOptions = () => {
 
               <div>
                 <div className="font-bold text-base">
-                  {payment.bank_name}
+                  {payment.bankName}
                 </div>
 
                 <div className="text-sm text-black mt-1">
-                  {payment.account_number}
+                  {payment.accountNumber}
                 </div>
 
                 <div className="text-xs text-black mt-1">
-                  {payment.account_holder}
+                  {payment.accountName}
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ import { FiPlus } from "react-icons/fi";
 import priceFormatter from "@/app/utils/price-formatter";
 import { Product } from "@/app/types";
 import { getImageUrl } from "@/app/lib/api";
-import { useCartStore } from "@/app/hooks/use-cart-store";
+import useCartStore from "@/app/hooks/use-cart-store";
 
 import Button from "../ui/button";
 
@@ -54,10 +54,12 @@ const ProductsSection = ({ products = [] }: TProductsProps) => {
 
               <Button
                 type="button"
-                className="absolute top-3 right-3 w-7 h-7 bg-primary text-white flex items-center justify-center rounded"
+                size="icon"
+                variant="primary"
+                className="absolute top-3 right-3"
                 onClick={(e) => handleAddToCart(e, product)}
               >
-                <FiPlus size={16} />
+                <FiPlus size={16} className="text-white" />
               </Button>
             </div>
 

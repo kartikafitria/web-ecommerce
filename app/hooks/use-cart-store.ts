@@ -6,17 +6,35 @@ export interface CartItem extends Product {
   qty: number;
 }
 
+export interface CustomerInfo {
+  customerName: string;
+  customerContact: string;
+  customerAddress: string;
+}
+
 interface CartStore {
+  customerInfo: CustomerInfo | null;
   items: CartItem[];
+  checkoutItems: CartItem[] | null;
+
+  setCustomerInfo: (info: CustomerInfo) => void;
   addItem: (product: Product, qty?: number) => void;
   removeItem: (productId: string) => void;
+
+  setCheckoutItems: (items: CartItem[] | null) => void;
   reset: () => void;
 }
 
-export const useCartStore = create<CartStore>()(
+const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
+      customerInfo: null,
       items: [],
+      checkoutItems: null,
+
+      setCustomerInfo: (info) => {
+        set({ customerInfo: info });
+      },
 
       addItem: (product, qty = 1) => {
         const items = get().items;
@@ -47,8 +65,16 @@ export const useCartStore = create<CartStore>()(
         });
       },
 
+      setCheckoutItems: (items) => {
+        set({ checkoutItems: items });
+      },
+
       reset: () => {
-        set({ items: [] });
+        set({
+          items: [],
+          customerInfo: null,
+          checkoutItems: null,
+        });
       },
     }),
     {
@@ -56,3 +82,5 @@ export const useCartStore = create<CartStore>()(
     }
   )
 );
+
+export default useCartStore;

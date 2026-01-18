@@ -7,9 +7,7 @@ const HeroSection = () => {
     <section className="relative container mx-auto min-h-screen flex items-center">
       <div className="grid grid-cols-2 w-full items-center">
 
-        {/* LEFT CONTENT */}
         <div className="relative">
-          {/* background basketball */}
           <Image
             src="/images/img-basketball.svg"
             width={380}
@@ -55,7 +53,6 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* RIGHT CONTENT */}
         <div className="relative flex justify-end">
           <Image
             src="/images/img-hero.svg"
@@ -67,7 +64,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* ornament */}
       <Image
         src="/images/img-ornament-hero.svg"
         width={140}

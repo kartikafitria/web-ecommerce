@@ -9,18 +9,32 @@ import {
 import { useState } from "react";
 import Button from "../ui/button";
 import { useRouter } from "next/navigation";
+import useCartStore from "@/app/hooks/use-cart-store";
+import { Product } from "@/app/types";
 
 type TProductActionsProps = {
-  stock: number
-}
+  product: Product;
+  stock: number;
+};
 
-const ProductActions = ({stock}:TProductActionsProps) => {
+const ProductActions = ({ product, stock }: TProductActionsProps) => {
+  const { addItem, setCheckoutItems } = useCartStore();
   const router = useRouter();
-  const { push } = router;
-
   const [qty, setQty] = useState(1);
 
-  const checkout = () => {
+  const handleAddToCart = () => {
+    addItem(product, qty);
+  };
+
+  const handleCheckoutNow = () => {
+    setCheckoutItems([
+      {
+        ...product,
+        qty,
+      },
+    ]);
+
+    router.push("/checkout");
   };
 
   return (
@@ -32,18 +46,14 @@ const ProductActions = ({stock}:TProductActionsProps) => {
 
         <div className="flex flex-col w-[40px]">
           <button
-            aria-label="Increase quantity"
-            onClick={() => setQty((prev) => qty < stock ? qty + 1 : qty)}
+            onClick={() => setQty((prev) => (prev < stock ? prev + 1 : prev))}
             className="flex-1 flex items-center justify-center border-b border-gray-400 hover:bg-gray-100"
           >
             <FiChevronUp />
           </button>
 
           <button
-            aria-label="Decrease quantity"
-            onClick={() =>
-              setQty((prev) => (prev > 1 ? prev - 1 : prev))
-            }
+            onClick={() => setQty((prev) => (prev > 1 ? prev - 1 : prev))}
             className="flex-1 flex items-center justify-center hover:bg-gray-100"
           >
             <FiChevronDown />
@@ -51,7 +61,10 @@ const ProductActions = ({stock}:TProductActionsProps) => {
         </div>
       </div>
 
-      <Button className="px-10 h-[56px] flex items-center gap-3">
+      <Button
+        className="px-10 h-[56px] flex items-center gap-3"
+        onClick={handleAddToCart}
+      >
         <FiShoppingBag size={20} />
         Add to Cart
       </Button>
@@ -59,7 +72,7 @@ const ProductActions = ({stock}:TProductActionsProps) => {
       <Button
         variant="dark"
         className="px-10 h-[56px] flex items-center gap-3"
-        onClick={() => push("/checkout")}
+        onClick={handleCheckoutNow}
       >
         Checkout Now
         <FiArrowRight size={20} />
